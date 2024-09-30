@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizLink - Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 4rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        #slides-container {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Progress Indicator */
+        .progress {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .progress-dot.active {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Initial Title -->
+    <h1 id="bizlink-title">BizLink</h1>
+
+    <!-- Slideshow Container -->
+    <div id="slides-container">
+        <div class="slide active">
+            <h2>Welcome to BizLink</h2>
+            <p>BizLink is an application that connects students and businesses to create opportunities for collaboration and growth.</p>
+        </div>
+
+        <div class="slide">
+            <h2>How BizLink Helps Students</h2>
+            <p>Students can create profiles, showcase their skills, and connect with businesses for internships, sponsorships, and more.</p>
+        </div>
+
+        <div class="slide">
+            <h2>How BizLink Helps Brands/Companies</h2>
+            <p>Brands can find talented students, promote their business, and engage in collaborative projects to build their brand visibility.</p>
+        </div>
+
+        <div class="slide">
+            <h2>BizLink's Motto</h2>
+            <p>Our motto is to create lasting value by fostering innovation, collaboration, and growth between students and businesses.</p>
+        </div>
+
+        <div class="buttons">
+            <button id="skip-btn">Skip</button>
+            <button id="next-btn">Next</button>
+            <a href="main.html"><button id="done-btn" style="display:none;">Done</button></a>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+        </div>
+    </div>
+
+    <script>
+        const bizlinkTitle = document.getElementById('bizlink-title');
+        const slidesContainer = document.getElementById('slides-container');
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const skipBtn = document.getElementById('skip-btn');
+        const doneBtn = document.getElementById('done-btn');
+        const progressDots = document.querySelectorAll('.progress-dot');
+        let currentSlide = 0;
+
+        // Show the slides when clicking on BizLink
+        bizlinkTitle.addEventListener('click', () => {
+            bizlinkTitle.style.display = 'none'; // Hide the title
+            slidesContainer.style.display = 'block'; // Show the slides
+        });
+
+        // Function to show the next slide
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                slides[currentSlide].classList.remove('active');
+                progressDots[currentSlide].classList.remove('active');
+                currentSlide++;
+                slides[currentSlide].classList.add('active');
+                progressDots[currentSlide].classList.add('active');
+            }
+
+            // Handle button visibility
+            if (currentSlide === slides.length - 1) {
+                nextBtn.style.display = 'none'; // Hide the Next button on the last slide
+                doneBtn.style.display = 'inline-block'; // Show the Done button
+            }
+        });
+
+        // Skip to registration page
+        skipBtn.addEventListener('click', () => {
+            window.location.href = "registration.html"; // Link to the registration page
+        });
+
+        // Done button to go to registration page after all slides
+        doneBtn.addEventListener('click', () => {
+            window.location.href = "registration.html"; // Link to the registration page
+        });
+    </script>
+</body>
+</html>
